@@ -37,7 +37,7 @@
           }
         },
         "bodyPatterns" : [ {
-          "equalToJson" : "{ \"userName\": \"Jack\", \"userId\": 15 }"
+          "equalToJson" : "{ \"userName\": \"Jack\",  \"role\": \"admin\"}"
         } ]
       },
       "response": {
@@ -45,7 +45,28 @@
         "headers": {
           "Content-Type": "application/json"
         },
-        "body": "{\"status\":\"Created\"}"
+        "body": "{\"status\":\"Created\", \"userId\": 15}"
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/users/45",
+        "headers": {
+          "Content-Type": {
+            "matches": "application/json"
+          }
+        },
+        "bodyPatterns" : [ {
+          "equalToJson" : "{ \"userName\": \"Mike\", \"role\": \"admin\" }"
+        } ]
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": "{\"status\":\"Updated\"}"
       }
     }
   ]
