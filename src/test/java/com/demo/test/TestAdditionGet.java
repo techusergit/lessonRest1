@@ -3,6 +3,8 @@ package com.demo.test;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
@@ -49,9 +51,22 @@ public class TestAdditionGet {
                 //.body("users", not(emptyArray()));
     }
 
+    @Test()
+    public void getUsersContent() {
+        RequestSpecification specforresp = RestAssured.given();
+        String responsee =  specforresp
+                // .basePath("users")
+                .get(baseURL)
+                .then()
+                .statusCode(200)
+                .contentType(ContentType.TEXT)
+        .extract()
+                .asString();
+
+        Assert.assertEquals(responsee,"{\n  \"users\": [\n    {\n      \"userName\": \"Andry\",\n      \"userId\": 23\n    },\n    {\n      \"userName\": \"Eduard\",\n      \"userId\": 12\n    }\n  ]\n}" );
 
 
-
+    }
 
 }
 
