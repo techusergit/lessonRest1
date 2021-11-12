@@ -14,6 +14,8 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 
+
+
 public class TestAdditionGet {
 
 
@@ -26,9 +28,9 @@ public class TestAdditionGet {
                 .baseUri(baseURL)
                // .basePath("users")
                 .when().get()
-                .then()
+                .then().log().all()
                 .statusCode(200)
-               .contentType(ContentType.TEXT)
+                .contentType("text/plain")
               //  .body(  "users", not(emptyArray()))
                 .assertThat().body(not(emptyArray()));
               // .body("users",equalTo(5) );
@@ -42,8 +44,9 @@ public class TestAdditionGet {
                 .baseUri(baseURL)
                 // .basePath("users")
                 .get()
-                .then()
+                .then().log().all()
                 .statusCode(200)
+                .contentType("application/json")
                 .contentType(ContentType.JSON)
                  .body("userId", equalTo(23))
                  .body("userName", equalTo("Andry"));
@@ -53,20 +56,24 @@ public class TestAdditionGet {
 
     @Test()
     public void getUsersContent() {
+        String expectation = "{\n  \"users\": [\n    {\n      \"userName\": \"Andry\",\n      \"userId\": 23\n    },\n    {\n      \"userName\": \"Eduard\",\n      \"userId\": 12\n    }\n  ]\n}";
         RequestSpecification specforresp = RestAssured.given();
         String responsee =  specforresp
                 // .basePath("users")
                 .get(baseURL)
-                .then()
+                .then().log().all()
                 .statusCode(200)
-                .contentType(ContentType.TEXT)
+                .contentType("text/plain")
         .extract()
                 .asString();
 
-        Assert.assertEquals(responsee,"{\n  \"users\": [\n    {\n      \"userName\": \"Andry\",\n      \"userId\": 23\n    },\n    {\n      \"userName\": \"Eduard\",\n      \"userId\": 12\n    }\n  ]\n}" );
-
+        Assert.assertEquals(responsee,expectation);
 
     }
+
+
+
+
 
 }
 
