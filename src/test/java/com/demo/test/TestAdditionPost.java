@@ -28,15 +28,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 
-public class TestAdditionPost{
+public class TestAdditionPost {
 
     public static final String HOST = "localhost";
     public static final int Port = 8080;
     private static WireMockServer server = new WireMockServer(Port);
 
     @BeforeMethod
-    public void InitiliazeServer(){
-        WireMock.configureFor(HOST,Port);
+    public void InitiliazeServer() {
+        WireMock.configureFor(HOST, Port);
         server.start();
 
     }
@@ -63,11 +63,11 @@ public class TestAdditionPost{
                 .assertThat()
                 .statusCode(201)
                 .body("status", equalTo("Created"))
-                .body("userId",notNullValue());
+                .body("userId", notNullValue());
     }
 
-  /*
-    @Test
+/*     ***тест в котором можно подсмотреть  в будущем как использовать поджо классы****
+    @Test()
     public void UpdateCustomer(){
         UpdateCustomerRequest request = new UpdateCustomerRequest();
         request.setCurrency("000001");
@@ -94,24 +94,24 @@ public class TestAdditionPost{
                 isNotNull()
                 .extracting(UpdateCustomerResponce::getIsOk)
                 .isEqualTo("true");
-   */ // тест в котором можно подсмотреть  в будущем как использовать поджо классы
+ */
 
-        @Test()
-        public void putUserWithPost() {
+    @Test()
+    public void putUserWithPost() {
 
-                     given()
+        given()
 
-                    .baseUri(TestAdditionGet.baseURL)
-                             .basePath("45")
-                    .contentType(ContentType.JSON)
-                    .body("{ \"userName\": \"Mike\", \"role\": \"admin\" }")
-                    .when().post()
-                    .then().log().all()
-                    .assertThat()
-                    .statusCode(200)
-                             .body("", hasKey("status"))
-                    .body("status", equalTo("Updated"));
-        }
+                .baseUri(TestAdditionGet.baseURL)
+                .basePath("45")
+                .contentType(ContentType.JSON)
+                .body("{ \"userName\": \"Mike\", \"role\": \"admin\" }")
+                .when().post()
+                .then().log().all()
+                .assertThat()
+                .statusCode(200)
+                .body("", hasKey("status"))
+                .body("status", equalTo("Updated"));
+    }
 
     @Test()
     public void putUserWithPostDoesntCreateUser() {
@@ -131,9 +131,4 @@ public class TestAdditionPost{
 
     }
 
-
-
-
-
-
-        }
+}
