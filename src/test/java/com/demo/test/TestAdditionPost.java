@@ -28,25 +28,26 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 
-
-
 public class TestAdditionPost{
-
-
-
-/*
 
     public static final String HOST = "localhost";
     public static final int Port = 8080;
     private static WireMockServer server = new WireMockServer(Port);
 
-
     @BeforeMethod
     public void InitiliazeServer(){
-        server.start();
         WireMock.configureFor(HOST,Port);
+        server.start();
+
     }
- */
+
+    @AfterMethod
+    public void closeConnectionServer() {
+        if (server.isRunning() && null != server) {
+            System.out.println("Shutdown");
+            server.shutdown();
+        }
+    }
 
 
     @Test()
@@ -133,14 +134,6 @@ public class TestAdditionPost{
 
 
 
-/*
-    @AfterMethod
-    public void closeConnectionServer() {
-        if (server.isRunning() && null != server) {
-            System.out.println("Shutdown");
-            server.shutdown();
-        }
-    }
- */
+
 
         }
