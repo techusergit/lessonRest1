@@ -55,3 +55,4 @@ public class TestAdditionGet {
                 .body("userId", is(expectedId));
     }
 }
+
