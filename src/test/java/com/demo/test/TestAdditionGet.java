@@ -16,7 +16,7 @@ public class TestAdditionGet {
     public static String baseURL = "http://localhost:8080/api/users";
 
     @Test()
-    public void getUsersIsNotEmptyt() {
+    public void getUsersIsNotEmpty() {
         given()
                 .baseUri(baseURL)
                 .when().get()
@@ -27,7 +27,7 @@ public class TestAdditionGet {
     }
 
     @Test()
-    public void getUsersIsNotEmpty() {
+    public void getUsersIsExpected() {
         RequestSpecification speca = RestAssured.given();
         speca.queryParam("userId", "23");
         ValidatableResponse resp = speca
