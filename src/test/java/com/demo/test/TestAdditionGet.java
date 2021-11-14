@@ -57,6 +57,3 @@ public class TestAdditionGet {
         Assert.assertEquals(responsee,expectation);
     }
 }
-
-
-

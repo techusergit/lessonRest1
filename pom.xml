@@ -12,7 +12,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <okhttp.vesion>4.9.0</okhttp.vesion>
+        <okhttp.vesion>4.9.2</okhttp.vesion>
     </properties>
 
 
@@ -20,11 +20,9 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.13.1</version>
+            <version>7.4.0</version>
             <scope>test</scope>
         </dependency>
-
-
         <!-- https://mvnrepository.com/artifact/com.github.tomakehurst/wiremock -->
         <dependency>
             <groupId>com.github.tomakehurst</groupId>
@@ -33,14 +31,6 @@
             <type>pom</type>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>com.github.tomakehurst</groupId>
-            <artifactId>wiremock-jre8</artifactId>
-            <version>2.31.0</version>
-            <scope>compile</scope>
-        </dependency>
-
 
         <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
         <dependency>
@@ -62,6 +52,18 @@
             <artifactId>xercesImpl</artifactId>
             <version>2.9.1</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.epages</groupId>
+            <artifactId>wiremock-spring-boot-starter</artifactId>
+            <version>0.8.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.ricall.junit5-wiremock</groupId>
+            <artifactId>junit5-wiremock</artifactId>
+            <version>2.0.0</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

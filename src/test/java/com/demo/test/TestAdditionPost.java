@@ -60,3 +60,4 @@ public class TestAdditionPost {
                 .body("status", not("Created"));
     }
 }
+
