@@ -71,7 +71,7 @@
         } ]
       },
       "response": {
-        "status": 201,
+        "status": 204,
         "headers": {
           "content-type": "application/json",
           "connection": "close"
