@@ -47,6 +47,35 @@
         },
         "body": "{\"status\":\"Created\"}"
       }
+    },
+    {
+      "request": {
+        "method": "PUT",
+        "url": "/api/users/228",
+        "headers": {
+          "content-type": {
+            "matches": "application/json"
+          },
+          "method": {
+            "matches": "PUT"
+          },
+          "Connection": {
+            "matches": "keep-alive"
+          }
+        },
+        "bodyPatterns" : [ {
+          "equalToJson" : "{ \"id\": \"21\", \"role\": \"technician\", \"salary\": \"200\" }"
+        } ]
+      },
+      "response": {
+        "status": 204,
+        "headers": {
+          "content-type": "application/json",
+          "connection": "close"
+        },
+        "body": "{ \"id\": \"21\", \"role\": \"technician\", \"salary\": \"200\",\"isOK\": \"1\"  }"
+      }
     }
+
   ]
 }
