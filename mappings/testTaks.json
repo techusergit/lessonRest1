@@ -56,9 +56,6 @@
           "content-type": {
             "matches": "application/json"
           },
-          "content-language": {
-            "matches": "en"
-          },
           "method": {
             "matches": "PUT"
           },
