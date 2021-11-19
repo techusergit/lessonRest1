@@ -16,9 +16,8 @@ public class AmazonTest {
     @BeforeClass
     public WebDriver setUpWebDriver() {
         System.setProperty("webdriver.chrome.driver", "/home/user/IdeaProjects/chromedriver");
-        // 1. Создать Webdriver:
+        // Create a WebDriver
         driver = new ChromeDriver();
-
         return driver;
     }
 
