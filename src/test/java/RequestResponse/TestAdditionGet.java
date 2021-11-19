@@ -5,10 +5,14 @@ import com.github.tomakehurst.wiremock.client.WireMock;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
+import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -24,7 +28,7 @@ public class TestAdditionGet {
 
     @BeforeMethod
     public void setUpWireMockServer() {
-//        WIRE_MOCK_SERVER.start();
+        WIRE_MOCK_SERVER.start();
         WireMock.configureFor(HOST, PORT);
     }
 
@@ -32,7 +36,7 @@ public class TestAdditionGet {
     public void stopWireMockServer() {
         if (WIRE_MOCK_SERVER.isRunning()) {
             System.out.println("Shot Down");
-//            WIRE_MOCK_SERVER.stop();
+            WIRE_MOCK_SERVER.stop();
         }
     }
 
@@ -111,6 +115,35 @@ public class TestAdditionGet {
             System.out.println();
             System.out.println("User not found");
         }
+
+    }
+
+    @Test
+    public void sendGetForCreateNewUser() {
+        System.out.println();
+        System.out.println("Start Test for send post request for create a new user");
+        System.out.println();
+
+        Map<String, String> headers = new HashMap<String, String>() {
+            {
+                put("Content-Type", ContentType.JSON.toString());
+            }
+        };
+
+        String apiURLForPost = String.format(URL, "api/users");
+
+        RequestSpecification spec = RestAssured.given();
+        spec.headers(headers);
+        spec.baseUri(apiURLForPost);
+        spec.body("{ \"userName\": \"Jack\",  \"role\": \"admin\"}");
+
+        ///Send get request for create a user
+
+        String responseAfterPostActual = spec.get(apiURLForPost).then().extract().body().asString();
+
+        int responseStatusCode = spec.get().statusCode();
+
+        Assert.assertEquals(responseStatusCode, 404);
 
     }
 

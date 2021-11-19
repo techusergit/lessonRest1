@@ -25,7 +25,7 @@ public class TestAdditionPost {
 
     @BeforeMethod
     public void setUpWireMockServer() {
-//        WIRE_MOCK_SERVER.start();
+        WIRE_MOCK_SERVER.start();
         WireMock.configureFor(HOST, PORT);
     }
 
@@ -33,7 +33,7 @@ public class TestAdditionPost {
     public void stopWireMockServer() {
         if (WIRE_MOCK_SERVER.isRunning()) {
             System.out.println("Shot Down");
-//            WIRE_MOCK_SERVER.stop();
+            WIRE_MOCK_SERVER.stop();
         }
     }
 
@@ -106,8 +106,6 @@ public class TestAdditionPost {
             }
         };
 
-//        String responsePostUpdateExistUserExpected = "{\"status\":\"Updated\"}";
-
         String responsePostUpdateExistUserExpected = "Request was not matched";
 
         String apiURLForPost = String.format(URL, "api/users/5000");
@@ -122,8 +120,6 @@ public class TestAdditionPost {
         System.out.println(responsePostUpdateExistUserActual);
 
         Assert.assertTrue(responsePostUpdateExistUserActual.contains(responsePostUpdateExistUserExpected));
-
-//        Assert.assertEquals(responsePostUpdateExistUserActual, responsePostUpdateExistUserExpected);
 
     }
 
