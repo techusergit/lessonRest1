@@ -1,9 +1,8 @@
 package PracticeForLesson8;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,9 +21,11 @@ public class ElMirTest {
 
     @BeforeClass
     public WebDriver setUpWebDriver() {
-        System.setProperty("webdriver.chrome.driver", "/home/user/IdeaProjects/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/home/user/projects/common/study_plan/workspace/lessonRest1/src/test/resources/chromedriver");
         // Create a WebDriver
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.setHeadless(true);
+        driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.manage().window().maximize();
 
@@ -37,8 +38,9 @@ public class ElMirTest {
 
         // Open ElMir site
         driver.get("https://elmir.ua/");
-        Thread.sleep(2000);
-
+        //Thread.sleep(2000);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//li/a[@class='ml-a pa'])[2]")));
+        System.out.println("Size: "+driver.manage().window().getSize());
         //Find the Contacts item of menu
         WebElement contactsHover = driver.findElement(By.xpath("(//li/a[@class='ml-a pa'])[2]"));
 
