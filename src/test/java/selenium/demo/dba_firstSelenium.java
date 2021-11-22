@@ -3,14 +3,19 @@ package selenium.demo;
 import org.checkerframework.checker.units.qual.K;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.test.web.servlet.htmlunit.webdriver.WebConnectionHtmlUnitDriver;
 import org.testng.Assert;
 
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import org.openqa.selenium.By;
@@ -18,6 +23,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 
@@ -25,7 +32,45 @@ public class dba_firstSelenium {
 
     public List<WebElement> keys;
     public List<WebElement> values;
+    WebDriver driver;
 
+
+    @BeforeTest
+    public void setup() throws IOException {
+        System.setProperty("webdriver.chrome.driver",
+                "/home/user/projects/common/study_plan/workspace/lessonRest1/src/test/resources/chromedriver");
+        driver = new ChromeDriver();
+    }
+
+    @AfterTest(alwaysRun = true)
+    public void tearDown() {
+        driver.quit();
+    }
+
+
+    @Test
+    public void elmirTest() {
+        // System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+
+        WebDriverWait wait = new WebDriverWait(driver, 2);
+
+        driver.get("https://elmir.ua/");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("basket-prompt")));
+        WebElement elementAlert = driver.findElement(By.id("subscribe-deny"));
+        Assert.assertTrue(elementAlert.isDisplayed());
+        elementAlert.click();
+        Actions builder = new Actions(driver);
+        WebElement element = driver.findElement(By.xpath("//a[@class = 'ml-a pa' and text() = 'Контакты']"));
+        builder.moveToElement(element).build().perform();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//header/div[@id='header-content']/nav[@id='menu']/ul[1]/li[2]/ul[1]/li[1]/a[1]")));
+        WebElement submenu1 =  driver.findElement(By.xpath("//header/div[@id='header-content']/nav[@id='menu']/ul[1]/li[2]/ul[1]/li[1]/a[1]")); //Find the submenu
+        builder.moveToElement(submenu1).click();
+
+        String URL = driver.getCurrentUrl();
+        //Assert.assertEquals(URL, "https://elmir.ua/contacts.html" );
+
+
+    }
 
 
     @Test
@@ -58,30 +103,7 @@ public class dba_firstSelenium {
     }
 
 
-    @Test
-    public void elmirTest() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(driver, 2);
 
-        driver.get("https://elmir.ua/");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("basket-prompt")));
-        WebElement elementAlert = driver.findElement(By.id("subscribe-deny"));
-        Assert.assertTrue(elementAlert.isDisplayed());
-        elementAlert.click();
-        Actions builder = new Actions(driver);
-        WebElement element = driver.findElement(By.xpath("//a[@class = 'ml-a pa' and text() = 'Контакты']"));
-        builder.moveToElement(element).build().perform();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//header/div[@id='header-content']/nav[@id='menu']/ul[1]/li[2]/ul[1]/li[1]/a[1]")));
-        WebElement submenu1 =  driver.findElement(By.xpath("//header/div[@id='header-content']/nav[@id='menu']/ul[1]/li[2]/ul[1]/li[1]/a[1]")); //Find the submenu
-        builder.moveToElement(submenu1).click();
-
-        String URL = driver.getCurrentUrl();
-        Assert.assertEquals(URL, "https://elmir.ua/contacts.html" );
-        driver.quit();
-
-
-    }
 
 
 }
