@@ -5,9 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePage extends BaseTest {
-
-    private WebDriver driver;
+public class HomePage extends BasePage {
 
     @FindBy(id = "twotabsearchtextbox")
     private WebElement amazonSearchField;
@@ -16,8 +14,8 @@ public class HomePage extends BaseTest {
     private WebElement amazonSearchButton;
 
     public HomePage(WebDriver driver) {
+        super(driver);
         PageFactory.initElements(driver, this);
-        this.driver = driver;
     }
 
     public HomePage enterNameOfBoots(String nameOfBoots) {
