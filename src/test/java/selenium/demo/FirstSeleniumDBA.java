@@ -20,12 +20,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
 
 
-public class dba_firstSelenium {
+public class FirstSeleniumDBA {
 
     public List<WebElement> keys;
     public List<WebElement> values;
@@ -33,7 +32,7 @@ public class dba_firstSelenium {
 
 
     @BeforeTest
-    public void setup() throws IOException {
+    public void setup()  {
         System.setProperty("webdriver.chrome.driver",
                 "chromedriver.exe");
         driver = new ChromeDriver();
@@ -51,7 +50,7 @@ public class dba_firstSelenium {
     public void elmirTest() {
         // System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(500));
 
         driver.get("https://elmir.ua/");
 
@@ -59,20 +58,19 @@ public class dba_firstSelenium {
         WebElement elementAlert = driver.findElement(By.id("subscribe-deny"));
         Assert.assertTrue(elementAlert.isDisplayed());
         elementAlert.click();
-        Actions mouse = new Actions(driver);
         //локатор на кнопку Контакты
         WebElement element = driver.findElement(By.xpath("//a[@class = 'ml-a pa' and text() = 'Контакты']"));
         //локатор на кнопку контактс в всплывающем меню
-        WebElement submenu1 =  driver.findElement(By.xpath("//a[@class='ml-a' and @href='/contacts.html']"));
+        Actions mouse = new Actions(driver);
         mouse.moveToElement(element).perform();
         //локатор на всплывающее меню
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[2]/ul[@class='submenu']")));
 
+        WebElement contactsHref =  driver.findElement(By.xpath("//a[@class='ml-a' and @href='/contacts.html']"));
+
        // mouse.moveToElement(submenu1).perform();
-        submenu1.click();
+        contactsHref.click();
         wait.until(ExpectedConditions.urlToBe("https://elmir.ua/contacts.html"));
-
-
 
     }
 
