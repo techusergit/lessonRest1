@@ -42,10 +42,11 @@ public class FirstSeleniumDBA {
 
 
     @Test
-    public void elmirTest() {
+    public void elmirTest() throws InterruptedException {
         // System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(500));
+
 
         driver.get("https://elmir.ua/");
 
@@ -60,20 +61,23 @@ public class FirstSeleniumDBA {
         mouse.moveToElement(element).perform();
 
         //локатор на всплывающее меню
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[2]/ul[@class='submenu']")));
+       // wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[2]/ul[@class='submenu']")));
 
         WebElement contactsHref =  driver.findElement(By.xpath("//a[@class='ml-a' and @href='/contacts.html']"));
 
        // mouse.moveToElement(submenu1).perform();
+
         contactsHref.click();
         wait.until(ExpectedConditions.urlToBe("https://elmir.ua/contacts.html"));
 
+  /*
         try {
             element.click();
         } catch (StaleElementReferenceException e) {
             element = driver.findElement(By.xpath("//a[@class = 'ml-a pa' and text() = 'Контакты']"));
             element.click();
         }
+   */
 
     }
 
