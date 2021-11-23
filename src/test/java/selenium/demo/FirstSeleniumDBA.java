@@ -1,7 +1,7 @@
 package selenium.demo;
 
 import org.checkerframework.checker.units.qual.K;
-import org.openqa.selenium.Alert;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -14,11 +14,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
-import org.openqa.selenium.By;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
 import java.util.*;
@@ -63,6 +58,7 @@ public class FirstSeleniumDBA {
         //локатор на кнопку контактс в всплывающем меню
         Actions mouse = new Actions(driver);
         mouse.moveToElement(element).perform();
+
         //локатор на всплывающее меню
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[2]/ul[@class='submenu']")));
 
@@ -71,6 +67,13 @@ public class FirstSeleniumDBA {
        // mouse.moveToElement(submenu1).perform();
         contactsHref.click();
         wait.until(ExpectedConditions.urlToBe("https://elmir.ua/contacts.html"));
+
+        try {
+            element.click();
+        } catch (StaleElementReferenceException e) {
+            element = driver.findElement(By.xpath("//a[@class = 'ml-a pa' and text() = 'Контакты']"));
+            element.click();
+        }
 
     }
 
