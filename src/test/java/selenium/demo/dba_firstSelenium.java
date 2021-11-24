@@ -1,5 +1,7 @@
 package selenium.demo;
-
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.checkerframework.checker.units.qual.K;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -33,9 +35,11 @@ public class dba_firstSelenium {
 
 
     @BeforeTest
-    public void setup() throws IOException {
+    public void setup() {
         System.setProperty("webdriver.chrome.driver",
                 "chromedriver.exe");
+        driver = new ChromeDriver();
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
     }
 
@@ -49,9 +53,10 @@ public class dba_firstSelenium {
 
     @Test
     public void elmirTest() {
+
         // System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, 10, 500);
 
         driver.get("https://elmir.ua/");
 
@@ -62,20 +67,18 @@ public class dba_firstSelenium {
         Actions mouse = new Actions(driver);
         //локатор на кнопку Контакты
         WebElement element = driver.findElement(By.xpath("//a[@class = 'ml-a pa' and text() = 'Контакты']"));
-        //локатор на кнопку контактс в всплывающем меню
-        WebElement submenu1 =  driver.findElement(By.xpath("//a[@class='ml-a' and @href='/contacts.html']"));
-        mouse.moveToElement(element).perform();
-        //локатор на всплывающее меню
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[2]/ul[@class='submenu']")));
 
-       // mouse.moveToElement(submenu1).perform();
+        element.click();
+        //локатор на всплывающее меню
+
+   //     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[2]/ul[@class='submenu']")));
+        //локатор на кнопку контактс в всплывающем меню
+        WebElement submenu1 = driver.findElement(By.xpath("//a[@class='ml-a' and @href='/contacts.html']"));
+        // mouse.moveToElement(submenu1).perform();
         submenu1.click();
         wait.until(ExpectedConditions.urlToBe("https://elmir.ua/contacts.html"));
 
-
-
     }
-
 
     @Test
     public void amazonTest() {
