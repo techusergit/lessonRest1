@@ -27,7 +27,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
-public class dba_firstSelenium {
+public class FirstSeleniumDBA {
 
     public List<WebElement> keys;
     public List<WebElement> values;
