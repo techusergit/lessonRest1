@@ -2,7 +2,7 @@ package selenium.demo;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.checkerframework.checker.units.qual.K;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Action;
@@ -61,18 +61,21 @@ public class dba_firstSelenium {
         driver.get("https://elmir.ua/");
 
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.MINUTES);
-        WebDriverWait wait = new WebDriverWait(driver,4);
+      driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    //  WebDriverWait wait = new WebDriverWait(driver,4);
         driver.manage().window().maximize();
-        WebElement alert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("subscribe-deny")));
+       // WebElement alert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("subscribe-deny")));
+        WebElement alert = driver.findElement(By.id("subscribe-deny"));
         alert.click();
         Actions actions = new Actions(driver);
 
-        WebElement Contacts = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class = 'ml-a pa' and text() = 'Контакты']")));
+      //  WebElement Contacts = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class = 'ml-a pa' and text() = 'Контакты']")));
+        WebElement Contacts = driver.findElement(By.xpath("//a[@class = 'ml-a pa' and text() = 'Контакты']"));
         // Contacts.click();
         actions.moveToElement(Contacts).build().perform();
-        WebElement contacts2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='ml-a' and @href='/contacts.html']")));
+        WebElement contacts2 = driver.findElement(By.xpath("//a[@class='ml-a' and @href='/contacts.html']"));
         contacts2.click();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://elmir.ua/contacts.html");
         /*
           driver.get("https://elmir.ua/");
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.MINUTES);
