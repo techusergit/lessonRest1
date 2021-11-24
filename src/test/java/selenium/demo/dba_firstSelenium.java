@@ -24,6 +24,7 @@ import org.openqa.selenium.WebElement;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 
 public class dba_firstSelenium {
@@ -60,7 +61,7 @@ public class dba_firstSelenium {
         driver.get("https://elmir.ua/");
 
         driver.manage().window().maximize();
-
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.MINUTES);
         WebDriverWait wait = new WebDriverWait(driver,4);
         driver.manage().window().maximize();
         WebElement alert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("subscribe-deny")));
@@ -72,6 +73,17 @@ public class dba_firstSelenium {
         actions.moveToElement(Contacts).build().perform();
         WebElement contacts2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='ml-a' and @href='/contacts.html']")));
         contacts2.click();
+        /*
+          driver.get("https://elmir.ua/");
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.MINUTES);
+        WebElement deny = driver.findElement(By.xpath("//div[@id=\"subscribe-deny\"]"));
+        deny.click();
+        WebElement contacts = driver.findElement(By.xpath("//a[@class = \"ml-a pa\" and contains(text(),'Контакты')]"));
+        contacts.click();
+        WebElement goToContacts = driver.findElement(By.xpath("//a[@class = \"ml-a\" and contains(text(),'Контакты')]"));
+        goToContacts.click();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://elmir.ua/contacts.html");
+         */
 
     }
 
