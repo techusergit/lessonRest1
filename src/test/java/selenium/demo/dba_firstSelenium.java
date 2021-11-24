@@ -10,7 +10,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.test.web.servlet.htmlunit.webdriver.WebConnectionHtmlUnitDriver;
 import org.testng.Assert;
 
 import org.testng.annotations.AfterTest;
@@ -36,9 +35,11 @@ public class dba_firstSelenium {
 
     @BeforeTest
     public void setup() {
+      /*
         System.setProperty("webdriver.chrome.driver",
                 "chromedriver.exe");
         driver = new ChromeDriver();
+       */
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
     }
@@ -52,31 +53,25 @@ public class dba_firstSelenium {
 
 
     @Test
-    public void elmirTest() {
+    public void elmirTest()  {
 
         // System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 
-        WebDriverWait wait = new WebDriverWait(driver, 10, 500);
-
         driver.get("https://elmir.ua/");
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("basket-prompt")));
-        WebElement elementAlert = driver.findElement(By.id("subscribe-deny"));
-        Assert.assertTrue(elementAlert.isDisplayed());
-        elementAlert.click();
-        Actions mouse = new Actions(driver);
-        //локатор на кнопку Контакты
-        WebElement element = driver.findElement(By.xpath("//a[@class = 'ml-a pa' and text() = 'Контакты']"));
+        driver.manage().window().maximize();
 
-        element.click();
-        //локатор на всплывающее меню
+        WebDriverWait wait = new WebDriverWait(driver,4);
+        driver.manage().window().maximize();
+        WebElement alert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("subscribe-deny")));
+        alert.click();
+        Actions actions = new Actions(driver);
 
-   //     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[2]/ul[@class='submenu']")));
-        //локатор на кнопку контактс в всплывающем меню
-        WebElement submenu1 = driver.findElement(By.xpath("//a[@class='ml-a' and @href='/contacts.html']"));
-        // mouse.moveToElement(submenu1).perform();
-        submenu1.click();
-        wait.until(ExpectedConditions.urlToBe("https://elmir.ua/contacts.html"));
+        WebElement Contacts = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class = 'ml-a pa' and text() = 'Контакты']")));
+        // Contacts.click();
+        actions.moveToElement(Contacts).build().perform();
+        WebElement contacts2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='ml-a' and @href='/contacts.html']")));
+        contacts2.click();
 
     }
 
