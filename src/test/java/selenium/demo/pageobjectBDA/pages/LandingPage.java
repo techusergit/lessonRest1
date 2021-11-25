@@ -17,13 +17,6 @@ public class LandingPage {
     static String baseUrl = "https://elmir.ua/";
     //private final WebDriverWait wait = new WebDriverWait(driver, 10);
 
-    public LandingPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
-    }
-
-
-
     @FindBy(id = "subscribe-deny" )
     private WebElement denyAlert;
     @FindBy(xpath = "//a[@class = 'ml-a pa' and text() = 'Контакты']" )
@@ -31,8 +24,10 @@ public class LandingPage {
     @FindBy(xpath = "//a[@class='ml-a' and @href='/contacts.html']" )
     private WebElement contactsBtnInsideDropDownMenu;
 
-
-
+    public LandingPage(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+        this.driver = driver;
+    }
 
     public ContactsPage redirectToContactsPage() {
         driver.get(baseUrl);

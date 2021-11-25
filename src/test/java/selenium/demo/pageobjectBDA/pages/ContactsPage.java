@@ -40,10 +40,19 @@ public class ContactsPage {
 
     }
 
-    public ContactsPage triggerTheCallBackEmptyFieldValidation() {
+    public ContactsPage callBackSubmitBtnClick() {
+        callBackSubmit.click();
+        return this;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage.getText();
+    }
+
+/*    public ContactsPage triggerTheCallBackEmptyFieldValidation() {
         callBackSubmit.click();
         errorMessage.getText();
         Assert.assertEquals(errorMessage.getText(), "Введите номер полностью, например,\n057-728-38-48" );
         return this;
-    }
+    }*/
 }
