@@ -46,10 +46,13 @@ public class FirstSeleniumDBA {
     }
 
 
+
     @AfterTest(alwaysRun = true)
     public void tearDown() {
+
         driver.quit();
     }
+
 
 
 
@@ -61,32 +64,19 @@ public class FirstSeleniumDBA {
         driver.get("https://elmir.ua/");
 
         driver.manage().window().maximize();
-      driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    //  WebDriverWait wait = new WebDriverWait(driver,4);
-        driver.manage().window().maximize();
-       // WebElement alert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("subscribe-deny")));
+      driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
         WebElement alert = driver.findElement(By.id("subscribe-deny"));
         alert.click();
-        Actions actions = new Actions(driver);
 
-      //  WebElement Contacts = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class = 'ml-a pa' and text() = 'Контакты']")));
+        Actions actions = new Actions(driver);
         WebElement Contacts = driver.findElement(By.xpath("//a[@class = 'ml-a pa' and text() = 'Контакты']"));
         // Contacts.click();
         actions.moveToElement(Contacts).build().perform();
         WebElement contacts2 = driver.findElement(By.xpath("//a[@class='ml-a' and @href='/contacts.html']"));
         contacts2.click();
-        Assert.assertEquals(driver.getCurrentUrl(), "https://elmir.ua/contacts.html");
-        /*
-          driver.get("https://elmir.ua/");
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.MINUTES);
-        WebElement deny = driver.findElement(By.xpath("//div[@id=\"subscribe-deny\"]"));
-        deny.click();
-        WebElement contacts = driver.findElement(By.xpath("//a[@class = \"ml-a pa\" and contains(text(),'Контакты')]"));
-        contacts.click();
-        WebElement goToContacts = driver.findElement(By.xpath("//a[@class = \"ml-a\" and contains(text(),'Контакты')]"));
-        goToContacts.click();
-        Assert.assertEquals(driver.getCurrentUrl(), "https://elmir.ua/contacts.html");
-         */
+       //Assert.assertEquals(driver.getCurrentUrl(), "https://elmir.ua/contacts.html");
+
 
     }
 
@@ -114,7 +104,7 @@ public class FirstSeleniumDBA {
         System.out.println(sortedList);
         WebElement element3 = driver.findElement(By.xpath("//span[text()='" + sortedList.get(10) +"']/ancestor::div[@data-asin]/div/span/div/div/div[2]/div[1]"));
         element3.getAttribute("innerText");
-        System.out.println(element3.getAttribute("innerText").toString());
+        System.out.println(element3.getAttribute("innerText"));
         System.out.println(element1.size());
         driver.quit();
     }
