@@ -15,6 +15,7 @@ public class LandingPage {
 
     private WebDriver driver;
     static String baseUrl = "https://elmir.ua/";
+    Actions actions;
     //private final WebDriverWait wait = new WebDriverWait(driver, 10);
 
     @FindBy(id = "subscribe-deny" )
@@ -27,19 +28,22 @@ public class LandingPage {
     public LandingPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
+        this.actions = new Actions(driver);
     }
 
-    public ContactsPage redirectToContactsPage() {
-        driver.get(baseUrl);
-        denyAlert.click();
-        Actions actions = new Actions(driver);
+
+    public void clickDenyAlert() {
+         denyAlert.click();
+    }
+
+    public void moveToContactsBtn() {
         actions.moveToElement(contactsBtn).build().perform();
-        contactsBtnInsideDropDownMenu.click();
-
-  //    wait.until(visibilityOfElementLocated(By.id("page-title"))); //асертим что мы на странице
-        return new ContactsPage(driver);
+        //    wait.until(visibilityOfElementLocated(By.id("page-title"))); //асертим что мы на странице
     }
 
+    public void clickContactsBtnInsideDropDownMenu() {
+        contactsBtnInsideDropDownMenu.click();
+    }
 
 
 }

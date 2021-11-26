@@ -31,8 +31,9 @@ public class ContactsPage {
     @FindBy(xpath = "//div[@class='mw_error_text']" )
     private WebElement errorMessage;
 
+
     public ContactsPage openTheCallBackWindow() {
-        driver.get(LandingPage.baseUrl+"/contacts.html");
+
         callBackBtn.click();
         String window = driver.getWindowHandle(); //this will return all open windows
         driver.switchTo().window(window);
@@ -48,6 +49,8 @@ public class ContactsPage {
     public String getErrorMessage() {
         return errorMessage.getText();
     }
+
+
 
 /*    public ContactsPage triggerTheCallBackEmptyFieldValidation() {
         callBackSubmit.click();
