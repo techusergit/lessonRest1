@@ -1,8 +1,9 @@
-package ElMirPageObject;
+package ElMirPageObject.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,14 +19,16 @@ public class BasePage {
         action = new Actions(driver);
     }
 
-    public void waitElementClickableMethod(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    protected void waitElementClickableMethod(WebElement element, WebDriverWait wait) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public void moveToElementMethod(WebElement element) {
+    protected void moveToElementMethod(WebElement element) {
         action.moveToElement(element).build().perform();
     }
 
+    protected void waitForLoad(WebElement element, WebDriverWait wait){
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
 
 }

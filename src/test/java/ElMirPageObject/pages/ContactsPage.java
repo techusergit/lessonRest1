@@ -1,15 +1,18 @@
-package ElMirPageObject;
+package ElMirPageObject.pages;
 
+import ElMirPageObject.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class ContactsPage extends BasePage {
 
     protected String winHandleBefore;
-
-    protected String validationErrorText;
+    WebDriverWait wait;
 
     @FindBy(id = "hphone")
     private WebElement iconOfSupportNumber;
@@ -23,6 +26,7 @@ public class ContactsPage extends BasePage {
 
     public ContactsPage(WebDriver driver) {
         super(driver);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
 
@@ -40,13 +44,12 @@ public class ContactsPage extends BasePage {
     }
 
     public void clickOnTheCallButtonIntoAlert() {
-        waitElementClickableMethod(buttonMakeACallIntoAlert);
+        waitElementClickableMethod(buttonMakeACallIntoAlert, wait);
         buttonMakeACallIntoAlert.click();
     }
 
     public String getValidationErrorIntoAlert() {
-        waitElementClickableMethod(validationErrorIntoAlert);
-        validationErrorText = validationErrorIntoAlert.getText();
-        return validationErrorText;
+        waitElementClickableMethod(validationErrorIntoAlert, wait);
+        return validationErrorIntoAlert.getText();
     }
 }

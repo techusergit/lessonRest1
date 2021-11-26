@@ -1,5 +1,8 @@
-package ElMirPageObject;
+package ElMirPageObject.test.elmir;
 
+import ElMirPageObject.pages.ContactsPage;
+import ElMirPageObject.pages.HomePage;
+import ElMirPageObject.test.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -12,6 +15,7 @@ public class ValidationMobileNumberTest extends BaseTest {
 
         // Create a HomePage instance
         HomePage homePage = new HomePage(driver);
+        homePage.waitForPageLoad();
         homePage.moveToMenuContacts();
 
         // Call the ContactPage instance
