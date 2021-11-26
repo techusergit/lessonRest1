@@ -3,12 +3,11 @@ package SeleniumAndrew.Pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class BasePageElmir {
+public class BasePage {
 
     public WebDriver driver;
 
-    public BasePageElmir(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+    public BasePage(WebDriver driver) {
         this.driver = driver;
     }
 }

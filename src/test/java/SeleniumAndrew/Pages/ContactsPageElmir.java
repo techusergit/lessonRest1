@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ContactsPageElmir extends BasePageElmir {
+public class ContactsPageElmir extends BasePage {
 
     static String pageUrl = "https://elmir.ua/contacts.html";
 
@@ -19,16 +19,30 @@ public class ContactsPageElmir extends BasePageElmir {
     @FindBy(xpath = "//div[@class=\"mw_error_text\"]")
     public WebElement alertText;
 
-    public String clickCallBack() {
-        driver.get(pageUrl);
+    public void clickPhoneBtn() {
+        if(phoneBtn.isDisplayed())
+            phoneBtn.click();
+    }
+
+    public void clickCallBackBtn() {
+        if(callBackBtn.isDisplayed())
+            callBackBtn.click();
+    }
+
+    public String getAlertText() {
+        return alertText.getText();
+    }
+
+/*    public String clickCallBack() {
+
 //        String parentHandle = driver.getWindowHandle();
-        phoneBtn.isDisplayed();
-        phoneBtn.click();
+
+
 //        String newHandle = driver.getWindowHandle();
 //        driver.switchTo().window(newHandle);
         callBackBtn.isDisplayed();
         callBackBtn.click();
         alertText.isDisplayed();
         return alertText.getText();
-    }
+    }*/
 }

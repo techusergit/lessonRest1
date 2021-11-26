@@ -3,14 +3,15 @@ package SeleniumAndrew.Pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class MainPageElmir extends BasePageElmir {
+public class MainPageElmir extends BasePage {
 
     public MainPageElmir(WebDriver driver) {
         super(driver);
     }
 
-    static String pageUrl = "https://elmir.ua/";
+    public static final String MAIN_PAGE_URL = "https://elmir.ua/";
 
     @FindBy(xpath = "//div[@id=\"subscribe-deny\"]")
     private WebElement denyAlert;
@@ -19,14 +20,18 @@ public class MainPageElmir extends BasePageElmir {
     @FindBy(xpath = "//a[@class = \"ml-a\" and contains(text(),'Контакты')]")
     private WebElement contactsBtnDropDown;
 
-
-    public ContactsPageElmir goToContactsPage() {
-        driver.get(pageUrl);
+    public MainPageElmir clickDenyAlert() {
         denyAlert.click();
-        contactsBtn.click();
-        contactsBtnDropDown.click();
+        return this;
+    }
 
-        return new ContactsPageElmir(driver);
+    public void clickContactsBtn() {
+        contactsBtn.click();
+    }
+    //TODO: wait!!!
+    public ContactsPageElmir clickContactsBtnDropDown() {
+        contactsBtnDropDown.click();
+        return PageFactory.initElements(driver, ContactsPageElmir.class);
     }
 
 
