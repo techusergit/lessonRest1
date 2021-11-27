@@ -9,7 +9,7 @@ import selenium.demo.pageobjectBDA.assertions.AssertHelper;
 import selenium.demo.pageobjectBDA.pages.ContactsPage;
 import selenium.demo.pageobjectBDA.pages.LandingPage;
 
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
+
 
 public class ElmirTest extends TestBase {
 
@@ -23,10 +23,13 @@ public class ElmirTest extends TestBase {
         landingPage.clickDenyAlert();
         landingPage.moveToContactsBtn();
         landingPage.clickContactsBtnInsideDropDownMenu();
+        ContactsPage contactsPage = new ContactsPage(driver);
 
+        AssertHelper.assertPageLoadedByTitleText(contactsPage.getSignOfPageLoadedTitleText(), "Контакты");
 
     //  Assert.assertEquals(driver.getCurrentUrl(), "https://elmir.ua/contacts.html");
         LOG.debug("Перехожу на Контакты страницу");
+        LOG.info("тест пройден");
     }
 
     @Test
@@ -37,8 +40,7 @@ public class ElmirTest extends TestBase {
         //contactsPage.openTheCallBackWindow();
         //contactsPage.triggerTheCallBackEmptyFieldValidation();
         //contactsPage.callBackSubmitBtnClick();
-
         AssertHelper.assertContactsMessage(contactsPage.getErrorMessage(), "Введите номер полностью, например,\n057-728-38-48");
-       // System.out.println("негативный тест на колбек филд - PASSED");
+        System.out.println("id 1 негативный тест на колбек филд - PASSED");
     }
 }

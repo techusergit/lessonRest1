@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
@@ -23,8 +24,8 @@ public class TestBase {
         WebDriverManager.chromedriver().setup();
      //   driver = new FirefoxDriver();
        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        //WebDriverWait wait = new WebDriverWait(driver, 10);
+       // driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }
 

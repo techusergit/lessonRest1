@@ -14,5 +14,8 @@ public class AssertHelper {
         Assert.assertEquals(actual, expected);
     }
 
+    public static void assertPageLoadedByTitleText(String actual, String expected) {
+        Assert.assertEquals(actual, expected);
+    }
 
 }

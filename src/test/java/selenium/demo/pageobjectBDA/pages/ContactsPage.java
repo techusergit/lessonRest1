@@ -30,7 +30,9 @@ public class ContactsPage {
     private WebElement callBackSubmit;
     @FindBy(xpath = "//div[@class='mw_error_text']" )
     private WebElement errorMessage;
-
+    @FindBy(xpath = "//*[@id='page-title']")
+    //полный кспас для тайтла - "//*[@id='page-title' and text()='Контакты']"
+    private WebElement signOfPageLoadedTitleText;
 
     public ContactsPage openTheCallBackWindow() {
 
@@ -50,9 +52,12 @@ public class ContactsPage {
         return errorMessage.getText();
     }
 
+    public String getSignOfPageLoadedTitleText() {
 
+        return signOfPageLoadedTitleText.getText();
+    }
 
-/*    public ContactsPage triggerTheCallBackEmptyFieldValidation() {
+    /*    public ContactsPage triggerTheCallBackEmptyFieldValidation() {
         callBackSubmit.click();
         errorMessage.getText();
         Assert.assertEquals(errorMessage.getText(), "Введите номер полностью, например,\n057-728-38-48" );
