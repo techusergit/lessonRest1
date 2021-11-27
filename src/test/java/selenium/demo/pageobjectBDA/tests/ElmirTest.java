@@ -15,7 +15,6 @@ public class ElmirTest extends TestBase {
         LandingPage LandingPage = new LandingPage(driver);
         ContactsPage contactsPage = LandingPage.redirectToContactsPage();
 
-    //  Assert.assertEquals(driver.getCurrentUrl(), "https://elmir.ua/contacts.html");
     }
 
     @Test
