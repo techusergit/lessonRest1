@@ -10,6 +10,8 @@ import org.testng.Assert;
 import org.testng.asserts.Assertion;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -18,11 +20,12 @@ public class ContactsPage extends BasePage {
 
     private WebDriver driver;
     WebDriverWait wait;
+    protected String winHandleBefore;
 
     public ContactsPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
     @FindBy(id = "hphone" )
@@ -37,12 +40,44 @@ public class ContactsPage extends BasePage {
     //полный кспас для тайтла - "//*[@id='page-title' and text()='Контакты']"
     private WebElement signOfPageLoadedTitleText;
 
-    public ContactsPage openTheCallBackWindow() {
+    public  ContactsPage openTheCallBackWindow() throws InterruptedException {
         waitElementClickableMethod(callBackBtn, wait);
+        String master = driver.getWindowHandle();
         callBackBtn.click();
-       // waitForLoad(callBackWindow, wait);
-        String window = driver.getWindowHandle(); //this will return all open windows
-        driver.switchTo().window(window);
+        waitForLoad(callBackWindow, wait);
+     //   String window = driver.getWindowHandle(); //this will return all open windows
+     //   driver.switchTo().window(window);
+    //    winHandleBefore = driver.getWindowHandle();
+        // Switch to new window opened
+   //     for (String winHandle : driver.getWindowHandles()) {
+   //         driver.switchTo().window(winHandle);
+   //     }
+
+        int timeCount = 1;
+
+        do
+        {
+            driver.getWindowHandles();
+            Thread.sleep(200);
+            timeCount++;
+            if ( timeCount > 50 )
+            {
+                break;
+            }
+        }
+        while ( driver.getWindowHandles().size() == 1 );
+
+//Assigning the handles to a set
+        Set<String> handles = driver.getWindowHandles();
+//Switching to the popup window.
+        for ( String handle : handles )
+        {
+            if(!handle.equals(master))
+            {
+                driver.switchTo().window(handle);
+            }
+        }
+
         return this;
     }
 

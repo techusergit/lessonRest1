@@ -18,12 +18,13 @@ public class TestBase {
 
     @BeforeTest
     public void setup() {
-
-
       //  WebDriverManager.firefoxdriver().setup();
-        WebDriverManager.chromedriver().setup();
+     //   WebDriverManager.chromedriver().setup();
+        System.setProperty("webdriver.chrome.driver","chromedriver.exe");
      //   driver = new FirefoxDriver();
-       driver = new ChromeDriver();
+        if (driver == null) {
+            driver = new ChromeDriver();
+        }
        // driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();

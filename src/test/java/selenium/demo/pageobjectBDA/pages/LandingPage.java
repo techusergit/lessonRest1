@@ -52,7 +52,7 @@ public class LandingPage extends BasePage{
     }
 
     public void clickContactsBtnInsideDropDownMenu() {
-        waitForLoad(contactsBtnInsideDropDownMenu, wait);
+        waitElementClickableMethod(contactsBtnInsideDropDownMenu, wait);
         contactsBtnInsideDropDownMenu.click();
     }
 

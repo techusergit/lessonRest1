@@ -14,7 +14,7 @@ import selenium.demo.pageobjectBDA.pages.LandingPage;
 
 public class ElmirTest extends TestBase {
 
-    private static final Logger LOG = LogManager.getLogger(ElmirTest.class.getName());
+  //  private static final Logger LOG = LogManager.getLogger(ElmirTest.class.getName());
 
 
     @Test
@@ -39,10 +39,11 @@ public class ElmirTest extends TestBase {
     }
 
     @Test
-    public void checkTheCallBackEmptyFieldValidation() {
+    public void checkTheCallBackEmptyFieldValidation() throws InterruptedException {
         driver.get("https://elmir.ua/contacts.html");
-        ContactsPage contactsPage =
-                new ContactsPage(driver).openTheCallBackWindow().callBackSubmitBtnClick();
+        ContactsPage contactsPage = new ContactsPage(driver);
+        contactsPage.openTheCallBackWindow();
+        contactsPage.callBackSubmitBtnClick();
         AssertHelper.assertContactsMessage(contactsPage.getErrorMessage(), "Введите номер полностью, например,\n057-728-38-48");
 
         System.out.println("id 1 негативный тест на колбек филд - PASSED");
