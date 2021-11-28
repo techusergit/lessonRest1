@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import selenium.demo.pageobjectBDA.assertions.AssertHelper;
+import selenium.demo.pageobjectBDA.pages.BasePage;
 import selenium.demo.pageobjectBDA.pages.ContactsPage;
 import selenium.demo.pageobjectBDA.pages.LandingPage;
 
@@ -27,9 +28,14 @@ public class ElmirTest extends TestBase {
 
         AssertHelper.assertPageLoadedByTitleText(contactsPage.getSignOfPageLoadedTitleText(), "Контакты");
 
-    //  Assert.assertEquals(driver.getCurrentUrl(), "https://elmir.ua/contacts.html");
+
+        System.out.println("id 0 позитивный тест на переход на страницу контакты с LP страницы - PASSED");
+
+        //что-то в потенциале касающееся логинга
+    /*
         LOG.debug("Перехожу на Контакты страницу");
-        LOG.info("тест пройден");
+       LOG.info("тест пройден");
+     */
     }
 
     @Test
@@ -37,10 +43,8 @@ public class ElmirTest extends TestBase {
         driver.get("https://elmir.ua/contacts.html");
         ContactsPage contactsPage =
                 new ContactsPage(driver).openTheCallBackWindow().callBackSubmitBtnClick();
-        //contactsPage.openTheCallBackWindow();
-        //contactsPage.triggerTheCallBackEmptyFieldValidation();
-        //contactsPage.callBackSubmitBtnClick();
         AssertHelper.assertContactsMessage(contactsPage.getErrorMessage(), "Введите номер полностью, например,\n057-728-38-48");
+
         System.out.println("id 1 негативный тест на колбек филд - PASSED");
     }
 }
