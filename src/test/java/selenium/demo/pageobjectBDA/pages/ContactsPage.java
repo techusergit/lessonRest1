@@ -41,42 +41,22 @@ public class ContactsPage extends BasePage {
     private WebElement signOfPageLoadedTitleText;
 
     public  ContactsPage openTheCallBackWindow() throws InterruptedException {
+
+
+        String parentWindowHandler = driver.getWindowHandle(); // Store your parent window
+        String subWindowHandler = null;
+
         waitElementClickableMethod(callBackBtn, wait);
-        String master = driver.getWindowHandle();
         callBackBtn.click();
         waitForLoad(callBackWindow, wait);
-     //   String window = driver.getWindowHandle(); //this will return all open windows
-     //   driver.switchTo().window(window);
-    //    winHandleBefore = driver.getWindowHandle();
-        // Switch to new window opened
-   //     for (String winHandle : driver.getWindowHandles()) {
-   //         driver.switchTo().window(winHandle);
-   //     }
 
-        int timeCount = 1;
 
-        do
-        {
-            driver.getWindowHandles();
-            Thread.sleep(200);
-            timeCount++;
-            if ( timeCount > 50 )
-            {
-                break;
-            }
+        Set<String> handles = driver.getWindowHandles(); // get all window handles
+        Iterator<String> iterator = handles.iterator();
+        while (iterator.hasNext()){
+            subWindowHandler = iterator.next();
         }
-        while ( driver.getWindowHandles().size() == 1 );
-
-//Assigning the handles to a set
-        Set<String> handles = driver.getWindowHandles();
-//Switching to the popup window.
-        for ( String handle : handles )
-        {
-            if(!handle.equals(master))
-            {
-                driver.switchTo().window(handle);
-            }
-        }
+        driver.switchTo().window(subWindowHandler);
 
         return this;
     }
